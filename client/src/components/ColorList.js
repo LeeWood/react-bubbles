@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import auth from "../utils/auth";
 
 const initialColor = {
   color: "",
@@ -20,7 +20,14 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
+    // where is it saved right now?
+    auth()
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      //*this works...I need to set the actual state of color to res.data.color. It's saving...the display just needs to be immediately updated so you don't have to refresh the page to see the change in color name.
+      //!USEEFFECT???
+      //TODO ^^^ and implement DELETE
+      .then(res => console.log(res.data.color))
+      .catch(err => console.log(err))
   };
 
   const deleteColor = color => {
