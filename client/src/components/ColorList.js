@@ -27,12 +27,12 @@ const ColorList = ({ colors, updateColors }) => {
       //*this works...I need to set the actual state of color to res.data.color. It's saving...the display just needs to be immediately updated so you don't have to refresh the page to see the change in color name.
       /////!USEEFFECT???
       .then(res => {
-        console.log(res.data.color);
-        //updateColors(res.data.color);
+        console.log("puttted", res);
+        //updateColors(res.data);
         setEditing(false);
       })
       .catch(err => console.log(err))
-      //updates color name and hex, but needs to manually refresh the browser window to see changes...
+      //updates color name and hex, but needs to manually refresh the browser window to see changes...have to use updateColors but not sure how
   };
 
   const deleteColor = color => {
@@ -97,6 +97,14 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+
+      <p>Add a New Color</p>
+      <form>
+        <input type='text' placeholder='Color Name' />
+        <input type='text' placeholder='Hex Code' />
+        <button type='submit'>Add Color</button>
+      </form>
+
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
     </div>
