@@ -117,6 +117,7 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
 
+      {!editing && (
       <div className="addColor">
         <p>Add a New Color</p>
         <form onSubmit={addColor}>
@@ -142,6 +143,7 @@ const ColorList = ({ colors, updateColors }) => {
         
         </form>
       </div>
+      )}
 
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
