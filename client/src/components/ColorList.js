@@ -7,9 +7,11 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  //console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  
+  const [colorToAdd, setColorToAdd] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -42,6 +44,17 @@ const ColorList = ({ colors, updateColors }) => {
       .then(res => console.log(res))
       .catch(err => console.log(err));
      //again...successful, but component is not re-rendering after making the call. ot updating state?? 
+  };
+
+  //const 
+
+  const addColor = e => {
+    e.preventDefault();
+    console.log(colorToAdd);
+    
+    auth()
+      .post(`/api/colors`,colorToAdd)
+    setColorToAdd(initialColor);
   };
 
   return (
@@ -99,9 +112,25 @@ const ColorList = ({ colors, updateColors }) => {
       )}
 
       <p>Add a New Color</p>
-      <form>
-        <input type='text' placeholder='Color Name' />
-        <input type='text' placeholder='Hex Code' />
+      <form onSubmit={addColor}>
+        <input type='text' placeholder='Color Name' 
+          onChange={e => 
+            setColorToAdd({
+              ...colorToAdd,
+              color: e.target.value
+            })
+          } 
+          value={colorToAdd.color}
+        />
+        <input type='text' placeholder='Hex Code' 
+          onChange={e => 
+            setColorToAdd({
+              ...colorToAdd,
+              code: { hex: e.target.value}
+            })} 
+            value={colorToAdd.code.hex}
+        />
+
         <button type='submit'>Add Color</button>
       </form>
 
