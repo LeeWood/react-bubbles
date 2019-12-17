@@ -32,6 +32,8 @@ const ColorList = ({ colors, updateColors }) => {
         console.log("puttted", res);
         //updateColors(res.data);
         setEditing(false);
+        window.location.reload(true);
+        //reloads from the server...reflects changes.
       })
       .catch(err => console.log(err))
       //updates color name and hex, but needs to manually refresh the browser window to see changes...have to use updateColors but not sure how
@@ -41,7 +43,10 @@ const ColorList = ({ colors, updateColors }) => {
     // make a delete request to delete this color
     auth()
       .delete(`/api/colors/${color.id}`)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        window.location.reload(true);
+      })
       .catch(err => console.log(err));
      //again...successful, but component is not re-rendering after making the call. ot updating state?? 
   };
@@ -55,6 +60,7 @@ const ColorList = ({ colors, updateColors }) => {
     auth()
       .post(`/api/colors`,colorToAdd)
     setColorToAdd(initialColor);
+    window.location.reload(true);
   };
 
   return (
